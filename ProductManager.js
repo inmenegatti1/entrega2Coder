@@ -71,7 +71,16 @@ class ProductManager {
     async getProductId(id){
         this.arrayProdutos = await this.lerArquivo()
         const encontrarProduto =  this.arrayProdutos.find((produtos)=> produtos.id === id)
-        console.log(encontrarProduto)
+        return encontrarProduto
+    }
+
+    async verificarUltimoId(){
+        try {
+            let data = await this.lerArquivo()
+            console.log( data[data.length].id)
+        } catch (error) {
+            
+        }
     }
 
     async updateProducts(id, objProduto){
@@ -107,7 +116,15 @@ class ProductManager {
         }
         
     }
+
+    async filtrarQtdProduto(qtd){
+        const data = await this.lerArquivo()
+        this.arrayProdutos = data
+       return  this.arrayProdutos.slice(0, qtd)
+
+    }
 }
+module.exports =  ProductManager
 
 
     const productManager = new ProductManager();
@@ -143,7 +160,7 @@ class ProductManager {
     // criarTeste()
     // productManager.getProductId(1)
     // productManager.getProducts()
-    productManager.updateProducts(1, editado)
+    //productManager.updateProducts(1, editado)
    // productManager.deleteProduct(1)
 
 
