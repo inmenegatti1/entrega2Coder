@@ -45,8 +45,18 @@ class ProductManager {
                 } catch (error) {
                     console.log('Erro ao ler arquivo:', error);
                 }
-                objProduto.id = this.arrayProdutos.length + 1
-                this.arrayProdutos.push(objProduto);
+                if(this.arrayProdutos.length > 0){
+                    const tamanhoArray = this.arrayProdutos.length
+                    console.log(tamanhoArray)
+                   const ultimoId = this.arrayProdutos[tamanhoArray - 1].id
+                   console.log(ultimoId)
+                    objProduto.id = ultimoId + 1
+                    this.arrayProdutos.push(objProduto);
+                }else{
+                    objProduto.id = 1
+                    this.arrayProdutos.push(objProduto);
+                }
+                
                 await this.salvarArquivo(this.arrayProdutos)
                 console.log('Produto adicionado com sucesso');
             }
